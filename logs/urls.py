@@ -1,8 +1,9 @@
-from django.urls import path
+from rest_framework.routers import SimpleRouter
 
-from .views import LogList, LogDetail
+from .views import UserViewSet, LogViewSet
 
-urlpatterns = [
-    path("<int:pk>/", LogDetail.as_view(), name="log_detail"),
-    path("", LogList.as_view(), name="log_list"),
-]
+router = SimpleRouter()
+router.register("users", UserViewSet, basename="users")
+router.register("", LogViewSet, basename="logs")
+
+urlpatterns = router.urls
